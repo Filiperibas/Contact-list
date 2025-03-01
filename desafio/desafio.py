@@ -7,7 +7,7 @@ def adicionar_contatos(contatos, nome_contato, telefone_contato, email_contato):
 def visualizar_contato(contatos):
     print("\nLista de contatos:")
     for indice, contato in enumerate(contatos, start=1):
-        favorito = "❤" if contato["favorito"] else " "
+        favorito = "(❤)" if contato["favorito"] else "( )"
         nome_contato = contato["nome"]
         print(f"{indice} {nome_contato} {favorito}")
     return
@@ -35,6 +35,38 @@ def editar_contatos(contatos, indice, propriedades):
         print(f"Email {novo_email_contato} atualizado com sucesso")
     return
 
+def favoritar_desfavoritar_contatos(contatos):
+    if estado == 1:
+        a = "favoritar"
+    elif estado == 2:
+        a = "desfavoritar"
+    else:
+        print("Valor invalido")
+
+    indice = int(input(f"Qual o numero do contato que você deseja {a}: "))
+    indice_corrigido = indice - 1
+
+    if estado == 1:
+        contatos[indice_corrigido]["favorito"] = True
+        print("Contato favoritado com sucesso.")
+    elif estado == 2:
+          contatos[indice_corrigido]["favorito"] = False
+          print("Contato desfavoritado com sucesso.")
+    return
+
+def visualizar_contato_favorito(contatos):
+    print("\nLista de contatos favoritos")
+    for indice, contato in enumerate(contatos, start=1):
+        favorito = contato["favorito"]
+        nome_contato = contato["nome"]
+        if favorito == True:
+            favorito = "(❤)"
+            print(f"{indice} {nome_contato} {favorito}")
+    return
+
+def apagar_contato(contatos):
+    return 
+
 
 contatos = []
 while True:
@@ -47,7 +79,7 @@ while True:
     print("6. Apagar um contato.")
     print("7. Sair do programa")
 
-    escolha = int(input("Digite o numero da opção desejada:"))
+    escolha = int(input("Digite o numero da opção desejada: "))
 
     if escolha == 1:
         nome_contato = input("\nQue nome deseja salvar nesse contato: ")
@@ -66,9 +98,14 @@ while True:
         propriedades = int(input())
         editar_contatos(contatos, indice, propriedades)
     elif escolha == 4:
-        pass
+        print("Selecione uma opção:")
+        print("\n1. Favoritar contato")
+        print("2. Desfavoritar contato")
+        estado = int(input())
+        visualizar_contato(contatos)
+        favoritar_desfavoritar_contatos(contatos)
     elif escolha == 5: 
-        pass
+        visualizar_contato_favorito(contatos)
     elif escolha == 6:
         pass 
     elif escolha == 7:
