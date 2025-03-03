@@ -163,3 +163,5 @@ while True:
        
     elif escolha == 7:
         break
+
+print("Programa Finalizado.")
